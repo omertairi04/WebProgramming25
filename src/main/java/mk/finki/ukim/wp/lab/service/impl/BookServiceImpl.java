@@ -17,15 +17,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> listAll() {
-        return this.bookRepository.findAll();
-    }
-
-    @Override
     public List<Book> searchBooks(String text, Double rating) {
-        if(text == null || text.isEmpty() || rating == null || rating.isNaN()){
+        if (text == null || text.isEmpty() || rating == null || rating.isNaN()) {
             throw new IllegalArgumentException();
         }
         return bookRepository.searchBooks(text, rating);
     }
+
+    @Override
+    public List<Book> listAll() {
+        return this.bookRepository.findAll();
+    }
+
 }

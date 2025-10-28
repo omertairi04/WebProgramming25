@@ -17,15 +17,31 @@ public class BookReservation {
         return bookTitle;
     }
 
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
     public String getReaderName() {
         return readerName;
+    }
+
+    public void setReaderName(String readerName) {
+        this.readerName = readerName;
     }
 
     public String getReaderAddress() {
         return readerAddress;
     }
 
+    public void setReaderAddress(String readerAddress) {
+        this.readerAddress = readerAddress;
+    }
+
     public long getNumberOfCopies() {
         return numberOfCopies;
+    }
+
+    public void setNumberOfCopies(long numberOfCopies) {
+        this.numberOfCopies = numberOfCopies;
     }
 }

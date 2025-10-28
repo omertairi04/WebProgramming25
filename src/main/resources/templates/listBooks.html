@@ -54,18 +54,26 @@
          and the displayed text should be:
          Title: <book_title>, Genre: <book_genre>, Rating: <average_rating> -->
 
-      <th:block th:each="book : ${books}">
-        <label>
-          <input type="radio" th:id="${book.getTitle()}" name="bookTitle" th:value="${book.getTitle()}" required>
-        </label>
-        <label th:for="${book.getTitle()}">
-            <span th:text="${book.getTitle()}"></span><br>
-            <span th:text="${book.getGenre()}"></span><br>
-            <span th:text="${book.getAverageRating()}"></span><br>
-        </label>
-      </th:block>
+      <table>
+          <thead>
+          <tr>
+              <th>Select</th>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Rating</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="book : ${books}">
+              <td><input type="radio" name="bookTitle" th:value="${book.getTitle()}" required></td>
+              <td th:text="${book.getTitle()}"></td>
+              <td th:text="${book.getGenre()}"></td>
+              <td th:text="${book.getAverageRating()}"></td>
+          </tr>
+          </tbody>
+      </table>
 
-    <h2>Enter your information:</h2>
+      <h2>Enter your information:</h2>
     <label>Your Name:</label>
     <input type="text" name="readerName" required><br/>
     <label>Your Address:</label>
