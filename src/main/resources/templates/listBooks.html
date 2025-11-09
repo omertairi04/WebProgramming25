@@ -35,6 +35,23 @@
     <h1>Welcome to our Book Reservation App</h1>
 </header>
 <main>
+    <form action="/books/add" method="post">
+        <input type="text" name="title" placeholder="Title" required>
+
+        <input type="text" name="genre" placeholder="Genre" required>
+
+        <input type="number" step="0.01" name="averageRating" placeholder="Average Rating" required>
+
+        <select name="authorId" required>
+            <!-- Render authors dynamically -->
+            <option value="1">Omer Tairi</option>
+            <option value="2">Tairi Omer</option>
+        </select>
+
+        <button type="submit">Add Book</button>
+    </form>
+
+
     <form action="/" method="POST">
         <h2>Seach Option</h2>
         <label for="bookName">
