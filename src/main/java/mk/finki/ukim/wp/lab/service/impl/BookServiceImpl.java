@@ -25,6 +25,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book getBook(Long id) {
+        return bookRepository.getBook(id);
+    }
+
+    @Override
+    public void addBook(Book book) {
+        bookRepository.addBook(book);
+    }
+
+    @Override
+    public void updateBook(long id, Book book) {
+        bookRepository.updateBook(id, book);
+    }
+
+    @Override
+    public void deleteBook(long id) {
+        bookRepository.deleteBook(id);
+    }
+
+    @Override
     public List<Book> listAll() {
         return this.bookRepository.findAll();
     }

@@ -4,14 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 public class Book {
+    private static long counter = 0;
+    private long id;
     private String title;
     private String genre;
     private Double averageRating;
+    private Author author;
 
-    public Book(String title, String genre, Double averageRating) {
+    public Book(String title, String genre, Double averageRating, Author author) {
+        this.id = counter++;
         this.title = title;
         this.genre = genre;
         this.averageRating = averageRating;
+        this.author = author;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -36,5 +45,13 @@ public class Book {
 
     public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }

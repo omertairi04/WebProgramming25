@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${book.title}">Book Details</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1 th:text="${book.getTitle()}">Book Title</h1>
+
+<p>
+    <strong>Genre:</strong>
+    <span th:text="${book.getGenre()}"></span>
+</p>
+
+<p>
+    <strong>Average Rating:</strong>
+    <span th:text="${book.getAverageRating()}"></span>
+</p>
+
+<a href="/books">Back to Books</a>
+</body>
+</html>
