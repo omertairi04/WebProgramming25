@@ -24,4 +24,19 @@ public class AuthorServiceImpl implements AuthorService {
     public Author findById(Long id) {
         return authorRepository.findById(id);
     }
+
+    @Override
+    public Author create(Author author) {
+        return authorRepository.create(author);
+    }
+
+    @Override
+    public Author editAuthor(long id, Author author) {
+        return authorRepository.editAuthor(id, author);
+    }
+
+    @Override
+    public void delete(long id) {
+        authorRepository.delete(id);
+    }
 }

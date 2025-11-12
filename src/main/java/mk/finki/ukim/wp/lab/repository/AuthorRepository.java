@@ -8,4 +8,7 @@ import java.util.List;
 public interface AuthorRepository {
     public List<Author> findAll();
     public Author findById(long id);
+    public Author create(Author author);
+    public Author editAuthor(long id, Author author);
+    public void delete(long id);
 }

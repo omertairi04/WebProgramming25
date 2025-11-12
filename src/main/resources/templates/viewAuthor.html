@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${book.title}">Author Details</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1 th:text="${author.getFullName()}">Name</h1>
+
+<p>
+    <strong>Country</strong>
+    <span th:text="${author.getCountry()}"></span>
+</p>
+
+<p>
+    <strong>Biography</strong>
+    <span th:text="${author.getBiography()}"></span>
+</p>
+
+<a href="/author">Back to Authors</a>
+</body>
+</html>
