@@ -1,7 +1,7 @@
 package mk.finki.ukim.wp.lab.service.impl;
 
 import mk.finki.ukim.wp.lab.model.Book;
-import mk.finki.ukim.wp.lab.repository.BookRepository;
+import mk.finki.ukim.wp.lab.repository.jpa.BookRepository;
 import mk.finki.ukim.wp.lab.service.BookService;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addBook(Book book) {
-        bookRepository.addBook(book);
+        bookRepository.save(book);
     }
 
     @Override

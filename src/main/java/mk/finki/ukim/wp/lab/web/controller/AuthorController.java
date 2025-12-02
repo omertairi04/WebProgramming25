@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/author")
@@ -43,14 +44,14 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public String getAuthor (@PathVariable long id, Model model) {
-        Author author = authorService.findById(id);
+        Optional<Author> author = authorService.findById(id);
         model.addAttribute("author", author);
         return "viewAuthor";
     }
 
     @GetMapping("/edit/{id}")
     public String getEditAuthor(@PathVariable Long id, Model model) {
-        Author a = authorService.findById(id);
+        Optional<Author> a = authorService.findById(id);
         System.out.println("A : " + a);
         model.addAttribute("author",a);
         return "editAuthor";

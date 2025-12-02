@@ -1,17 +1,28 @@
 package mk.finki.ukim.wp.lab.model;
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Optional;
+
+@Entity
+@Data
+@Table(name="books")
 public class Book {
     private static long counter = 0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column()
     private String title;
+    @Column()
     private String genre;
+    @Column()
     private Double averageRating;
+    @ManyToOne
     private Author author;
 
-    public Book(String title, String genre, Double averageRating, Author author) {
+    public Book(String title, String genre, Double averageRating, Optional<Author> author) {
         this.id = counter++;
         this.title = title;
         this.genre = genre;
