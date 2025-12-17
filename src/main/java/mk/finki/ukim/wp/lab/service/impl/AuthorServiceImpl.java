@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class AuthorServiceImpl implements AuthorService {
-    AuthorRepository authorRepository;
+
+    private final AuthorRepository authorRepository;
 
     public AuthorServiceImpl(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
@@ -28,16 +28,23 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author create(Author author) {
-        return authorRepository.create(author);
+        return authorRepository.save(author);
     }
 
     @Override
     public Author editAuthor(long id, Author author) {
-        return authorRepository.editAuthor(id, author);
+        Author existing = authorRepository.findById(id).orElseThrow();
+
+        existing.setName(author.getName());
+        existing.setSurname(author.getSurname());
+        existing.setCountry(author.getCountry());
+        existing.setBiography(author.getBiography());
+
+        return authorRepository.save(existing);
     }
 
     @Override
     public void delete(long id) {
-        authorRepository.delete(id);
+        authorRepository.deleteById(id);
     }
 }

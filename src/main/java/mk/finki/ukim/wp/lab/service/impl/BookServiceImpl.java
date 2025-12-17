@@ -6,7 +6,6 @@ import mk.finki.ukim.wp.lab.service.BookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -26,7 +25,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBook(Long id) {
-        return bookRepository.getBook(id);
+        return bookRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,17 +35,20 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void updateBook(long id, Book book) {
-        bookRepository.updateBook(id, book);
+        Book existing = bookRepository.findById(id).orElseThrow();
+        existing.setTitle(book.getTitle());
+        existing.setAverageRating(book.getAverageRating());
+        existing.setAuthor(book.getAuthor());
+        bookRepository.save(existing);
     }
 
     @Override
     public void deleteBook(long id) {
-        bookRepository.deleteBook(id);
+        bookRepository.deleteById(id);
     }
 
     @Override
     public List<Book> listAll() {
-        return this.bookRepository.findAll();
+        return bookRepository.findAll();
     }
-
 }

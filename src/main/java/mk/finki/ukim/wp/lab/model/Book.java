@@ -22,7 +22,11 @@ public class Book {
     @ManyToOne
     private Author author;
 
-    public Book(String title, String genre, Double averageRating, Optional<Author> author) {
+    public Book() {
+
+    }
+
+    public Book(String title, String genre, Double averageRating, Author author) {
         this.id = counter++;
         this.title = title;
         this.genre = genre;

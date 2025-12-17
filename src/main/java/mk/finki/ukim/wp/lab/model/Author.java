@@ -10,30 +10,29 @@ import java.util.List;
 @Data
 @Table(name="authors")
 public class Author {
-    private static long counter = 0;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column()
+
     private String name;
-    @Column()
     private String surname;
-    @Column()
     private String country;
-    @Column(length=400)
+
+    @Column(length = 400)
     private String biography;
 
-    @OneToMany(mappedBy = "author")
-    private List<Book> books;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Book> books = new ArrayList<>();
 
     public Author(String name, String surname, String country, String biography) {
-        this.id = counter++;
         this.name = name;
         this.surname = surname;
         this.country = country;
         this.biography = biography;
-        this.books = new ArrayList<>();
     }
+
+    // REQUIRED by JPA
+    protected Author() {}
 
     public Long getId() {
         return id;

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @Controller
 @RequestMapping("/books")
 public class BookController {
@@ -23,12 +22,11 @@ public class BookController {
         this.authorService = authorService;
     }
 
-    @GetMapping()
+    @GetMapping
     public String getBooksPage(@RequestParam(required = false) String error, Model model) {
         if (error != null) {
             model.addAttribute("error", error);
         }
-
         model.addAttribute("books", bookService.listAll());
         return "listBooks"; // Thymeleaf template
     }
@@ -37,7 +35,6 @@ public class BookController {
     public String getBook(@PathVariable Long id, Model model) {
         Book book = bookService.getBook(id);
         model.addAttribute("book", book);
-
         return "viewBook";
     }
 
@@ -53,10 +50,18 @@ public class BookController {
                           @RequestParam Double averageRating,
                           @RequestParam Long authorId) {
 
+        // Fetch author from DB
         Author author = authorService.findById(authorId)
                 .orElseThrow(() -> new RuntimeException("Author not found"));
-        Book book = new Book(title, genre, averageRating, Optional.ofNullable(author));
-        bookService.addBook(book);
+
+        // Create new book (no manual ID)
+        Book book = new Book();
+        book.setTitle(title);
+        book.setGenre(genre);
+        book.setAverageRating(averageRating);
+        book.setAuthor(author);
+
+        bookService.addBook(book); // save to DB
 
         return "redirect:/books";
     }
@@ -64,10 +69,8 @@ public class BookController {
     @GetMapping("/edit/{id}")
     public String getEditBook(@PathVariable Long id, Model model) {
         Book book = bookService.getBook(id);
-
         model.addAttribute("book", book);
         model.addAttribute("authors", authorService.findAll());
-
         return "editBook";
     }
 
@@ -78,13 +81,20 @@ public class BookController {
                            @RequestParam Double averageRating,
                            @RequestParam Long authorId) {
 
+        // Fetch the existing book
+        Book existingBook = bookService.getBook(id);
+
+        // Fetch author
         Author author = authorService.findById(authorId)
                 .orElseThrow(() -> new RuntimeException("Author not found"));
 
-        // build updated book object
-        Book updated = new Book(title, genre, averageRating, Optional.ofNullable(author));
+        // Update fields
+        existingBook.setTitle(title);
+        existingBook.setGenre(genre);
+        existingBook.setAverageRating(averageRating);
+        existingBook.setAuthor(author);
 
-        bookService.updateBook(id, updated);
+        bookService.updateBook(existingBook.getId(), existingBook); // save updated entity
 
         return "redirect:/books";
     }
